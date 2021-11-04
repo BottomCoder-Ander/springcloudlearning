@@ -1,0 +1,13 @@
+server:
+  port: 80
+
+spring:
+  application:
+    name: cloud-consumer-order
+
+eureka:
+  client:
+    registere-with-eureka: true
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://localhost:7001/eureka
