@@ -1,0 +1,24 @@
+server:
+  port: 80
+
+spring:
+  application:
+    name: cloud-consumer-order
+
+eureka:
+  client:
+    registere-with-eureka: false # 不注册，只是个客户端
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka, http://eureka7002.com:7002/eureka
+
+ribbon:
+  #建立连接超时时间
+  ReadTimeout: 5000
+  #连接后从服务器读取到可用资源的超时时间
+  ConnectTimeout: 5000
+
+logging:
+  level:
+    #以什么日志级别监控那个接口
+    cool.cade.springcloud.service.PaymentFeignService: debug

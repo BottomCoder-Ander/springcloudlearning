@@ -18,6 +18,7 @@
             <artifactId>cloud-api-commons</artifactId>
             <version>${project.version}</version>
         </dependency>
+
         <dependency>
             <!--   web基础开发和tomcat内嵌服务器  -->
             <groupId>org.springframework.boot</groupId>

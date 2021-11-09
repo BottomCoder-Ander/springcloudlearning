@@ -4,6 +4,7 @@ package cool.cade.springcloud;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
 
 /**
@@ -11,6 +12,7 @@ import org.springframework.cloud.netflix.ribbon.RibbonClient;
  * @date 04/11/2021 - 00:14
  */
 @SpringBootApplication(exclude= {DataSourceAutoConfiguration.class})
+@EnableDiscoveryClient
 //@RibbonClient(name="CLOUD-PAYMENT-SERVICE", configuration = MyLoadBalanceRuleConfiguration.class)
 public class OrderMain {
     public static void main(String[] args) {

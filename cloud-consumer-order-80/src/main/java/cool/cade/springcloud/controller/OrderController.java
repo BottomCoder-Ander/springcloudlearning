@@ -41,9 +41,11 @@ public class OrderController {
         return restTemplate.postForObject(PAYMENT_URL + "/payment/", payment, CommonResult.class);
     }
 
-    @GetMapping("consumer/payment/{id}")
+    @GetMapping("/consumer/payment/{id}")
     @ResponseBody
     public CommonResult<Payment> getPayment(@PathVariable("id") Long id) {
+        log.info("=============get id = " + id);
+
         return restTemplate.getForObject(PAYMENT_URL + "/payment/" + id, CommonResult.class);
 
     }
@@ -56,7 +58,7 @@ public class OrderController {
             return null;
         }
         ServiceInstance serviceInstance = loadBalance.instance(instances);
-
+        // 因为这里不是用Ribbon的负载均衡（去掉了LoadBalance注解）所以我们要自己获取Uri，并连接
         URI uri = serviceInstance.getUri();
         log.info("uri = " + uri);
         return restTemplate.getForObject(uri + "/payment/loadbalance", String.class);

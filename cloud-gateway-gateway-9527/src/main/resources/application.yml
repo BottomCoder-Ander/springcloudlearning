@@ -1,0 +1,35 @@
+server:
+  port: 9527
+
+spring:
+  application:
+    name: cloud-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true # 开启动态路由
+      routes:
+        - id: payment_route #路由ID，没有固定规则要求唯一，建议配合服务名
+          #uri: http://localhost:8001 #服务地址
+          uri: lb://cloud-payment-service
+          predicates:
+            - Path=/payment/**   #断言，匹配路径
+
+        - id: payment_route2 #路由ID，没有固定规则要求唯一，建议配合服务名
+          #uri: http://localhost:8001 #服务地址
+          uri: lb://cloud-payment-service
+          predicates:
+            - Path=/payment/loadbalance/   #断言，匹配路径
+
+eureka:
+  client:
+    registere-with-eureka: true
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka, http://eureka7002.com:7002/eureka
+  instance:
+    instance-id: gateway9527
+    prefer-ip-address: true
+    lease-expiration-duration-in-seconds: 5
+    lease-renewal-interval-in-seconds: 1

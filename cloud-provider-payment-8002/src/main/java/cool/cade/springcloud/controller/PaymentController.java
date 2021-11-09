@@ -9,13 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Cade
  * @date 03/11/2021 - 21:29
  */
 @Slf4j
-@Controller
+@RestController
 public class PaymentController {
     @Resource
     private PaymentService paymentService;
@@ -60,5 +61,16 @@ public class PaymentController {
     public Object lb(){
         log.info("loadbalance payment ==========================");
         return serverPort;
+    }
+    @GetMapping(value = "/payment/feign/timeout")
+    @ResponseBody
+    public String paymentFeignTimeout(){
+        log.info("get request timeout found");
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return serverPort ;
     }
 }

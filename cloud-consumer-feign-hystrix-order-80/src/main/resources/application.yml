@@ -1,0 +1,18 @@
+server:
+  port: 80
+
+spring:
+  application:
+    name: cloud-consumer-hystrix-order
+
+eureka:
+  client:
+    registere-with-eureka: true
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka
+
+ribbon:
+  #OkToRetryOnAllOperations: false #对所有操作请求都进行重试,默认false
+  ReadTimeout: 6000   #负载均衡超时时间，默认值5000
+  ConnectTimeout: 5000 #ribbon请求连接的超时时间，默认值2000
